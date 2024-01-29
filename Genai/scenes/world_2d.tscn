@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgh2w6bvvfkxw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7aa0r"]
+size = Vector2(1000, 20)
+
+[node name="World_2d" type="Node2D"]
+metadata/_edit_lock_ = true
+
+[node name="Players" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Objects" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Spawnpoint" type="Marker2D" parent="."]
+position = Vector2(-350, 0)
+metadata/_edit_lock_ = true
+
+[node name="Ground" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2(0, 200)
+collision_layer = 0
+collision_mask = 4
+metadata/_edit_lock_ = true
+
+[node name="Line" type="Line2D" parent="Ground"]
+points = PackedVector2Array(-500, 0, 500, 0)
+width = 20.0
+metadata/_edit_lock_ = true
+
+[node name="Shape" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape2D_7aa0r")
+metadata/_edit_lock_ = true

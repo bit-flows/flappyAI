@@ -1,0 +1,742 @@
+[gd_scene load_steps=16 format=3 uid="uid://cuohxq5xukv4y"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_fw6xs"]
+[ext_resource type="PackedScene" uid="uid://dgh2w6bvvfkxw" path="res://scenes/world_2d.tscn" id="2_fflkb"]
+[ext_resource type="Texture2D" uid="uid://biichbw7m1xh4" path="res://textures/gui/world_border_overlay.png" id="3_bt3qi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_nx2l1"]
+font_size = 20
+
+[sub_resource type="Gradient" id="Gradient_5n5d1"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wcwqf"]
+gradient = SubResource("Gradient_5n5d1")
+fill_to = Vector2(0, 0)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f4rck"]
+texture = SubResource("GradientTexture2D_wcwqf")
+modulate_color = Color(0, 0.372549, 0.556863, 1)
+
+[sub_resource type="Theme" id="Theme_1xert"]
+Panel/styles/panel = SubResource("StyleBoxTexture_f4rck")
+
+[sub_resource type="LabelSettings" id="LabelSettings_1jcya"]
+font_size = 48
+
+[sub_resource type="LabelSettings" id="LabelSettings_55s5a"]
+font_size = 28
+
+[sub_resource type="LabelSettings" id="LabelSettings_1202u"]
+font_size = 20
+
+[sub_resource type="InputEventKey" id="InputEventKey_lb8yb"]
+device = -1
+ctrl_pressed = true
+keycode = 83
+
+[sub_resource type="Shortcut" id="Shortcut_arcfn"]
+events = [SubResource("InputEventKey_lb8yb")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_w1lby"]
+device = -1
+keycode = 4194305
+
+[sub_resource type="Shortcut" id="Shortcut_kemxp"]
+events = [SubResource("InputEventKey_w1lby")]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fw6xs")
+metadata/_edit_lock_ = true
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.32549, 0.737255, 1, 1)
+metadata/_edit_lock_ = true
+
+[node name="World_2d" parent="." instance=ExtResource("2_fflkb")]
+position = Vector2(480, 270)
+
+[node name="Grid" type="GridContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+metadata/_edit_lock_ = true
+
+[node name="World_Spacer" type="Control" parent="Grid"]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Border" type="TextureRect" parent="Grid/World_Spacer"]
+self_modulate = Color(0, 0.372549, 0.556863, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_bt3qi")
+metadata/_edit_lock_ = true
+
+[node name="VBox" type="VBoxContainer" parent="Grid/World_Spacer"]
+custom_minimum_size = Vector2(320, 250)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -320.0
+offset_top = -250.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 2
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Epochs" type="HBoxContainer" parent="Grid/World_Spacer/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/World_Spacer/VBox/Epochs"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Generation:"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="Label" parent="Grid/World_Spacer/VBox/Epochs"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "0"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Ais_alive" type="HBoxContainer" parent="Grid/World_Spacer/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/World_Spacer/VBox/Ais_alive"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "AIs alive"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="Label" parent="Grid/World_Spacer/VBox/Ais_alive"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "0"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="High_score" type="HBoxContainer" parent="Grid/World_Spacer/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/World_Spacer/VBox/High_score"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "High score:"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="Label" parent="Grid/World_Spacer/VBox/High_score"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "0"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Current_score" type="HBoxContainer" parent="Grid/World_Spacer/VBox"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 12
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/World_Spacer/VBox/Current_score"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Current score:"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="Label" parent="Grid/World_Spacer/VBox/Current_score"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "0"
+label_settings = SubResource("LabelSettings_nx2l1")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="AI_Controller" type="Panel" parent="Grid"]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+theme = SubResource("Theme_1xert")
+metadata/_edit_lock_ = true
+
+[node name="VBox" type="VBoxContainer" parent="Grid/AI_Controller"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Grid/AI_Controller/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Settings"
+label_settings = SubResource("LabelSettings_1jcya")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Settings_grups" type="HBoxContainer" parent="Grid/AI_Controller/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 30
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Generel_settings" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "General"
+label_settings = SubResource("LabelSettings_55s5a")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="AI_name" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/AI_name"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "AI name"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="LineEdit" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/AI_name"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "AI name"
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Layer_structure" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Layer_structure"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "AI layer structure"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="LineEdit" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Layer_structure"]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Layer structure"
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Save_load_AI" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_constants/separation = 3
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Save and load AI"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 3
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Save_AI" type="Button" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI/HBox"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_arcfn")
+text = "Save AI"
+metadata/_edit_lock_ = true
+
+[node name="Load_AI" type="Button" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI/HBox"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Load AI"
+metadata/_edit_lock_ = true
+
+[node name="Generate_AI" type="Button" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Generate AI"
+metadata/_edit_lock_ = true
+
+[node name="Simulation_control" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings"]
+custom_minimum_size = Vector2(0, 117)
+layout_mode = 2
+theme_override_constants/separation = 3
+metadata/_edit_lock_ = true
+
+[node name="Pause_next" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Pause_next"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Pause simulation"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Check_box" type="CheckBox" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Pause_next"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+shortcut = SubResource("Shortcut_kemxp")
+metadata/_edit_lock_ = true
+
+[node name="Autoplay_simulation" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Autoplay_simulation"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Autoplay simulation"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Check_box" type="CheckBox" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Autoplay_simulation"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Next_generation" type="Button" parent="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Next generation"
+metadata/_edit_lock_ = true
+
+[node name="AI_settings" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "AI"
+label_settings = SubResource("LabelSettings_55s5a")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="AIs_to_save" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/AIs_to_save"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "AIs to save"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/AIs_to_save"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/AIs_to_save/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 1.0
+max_value = 50.0
+value = 1.0
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/AIs_to_save/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Mutations_per_ai" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Mutations_per_ai"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Mutations per ai"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Mutations_per_ai"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Mutations_per_ai/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 1000.0
+value = 1.0
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Mutations_per_ai/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Weight_strength" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_strength"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Weight strength"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_strength"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_strength/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 1.0
+step = 0.01
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_strength/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Weight_amount" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_amount"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Weight amount"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_amount"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_amount/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 50.0
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_amount/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Biase_strength" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_strength"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Biase strength"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_strength"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_strength/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 10.0
+step = 0.01
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_strength/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Biase_amount" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/separation = 1
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_amount"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Biase amount"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="HBox" type="HBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_amount"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 10
+alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Value" type="HSlider" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_amount/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+max_value = 50.0
+ticks_on_borders = true
+metadata/_edit_lock_ = true
+
+[node name="Value_display" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_amount/HBox"]
+custom_minimum_size = Vector2(37, 37)
+layout_mode = 2
+size_flags_vertical = 3
+text = "0"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Other_settings" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+metadata/_edit_lock_ = true
+
+[node name="Title" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Other_settings"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Other"
+label_settings = SubResource("LabelSettings_55s5a")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Select_save_location" type="VBoxContainer" parent="Grid/AI_Controller/VBox/Settings_grups/Other_settings"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+theme_override_constants/separation = 3
+metadata/_edit_lock_ = true
+
+[node name="Label" type="Label" parent="Grid/AI_Controller/VBox/Settings_grups/Other_settings/Select_save_location"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Select save locatioan"
+label_settings = SubResource("LabelSettings_1202u")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_lock_ = true
+
+[node name="Select_save_location" type="Button" parent="Grid/AI_Controller/VBox/Settings_grups/Other_settings/Select_save_location"]
+custom_minimum_size = Vector2(0, 37)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+text = "Select"
+metadata/_edit_lock_ = true
+
+[node name="Stats" type="Panel" parent="Grid"]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+theme = SubResource("Theme_1xert")
+metadata/_edit_lock_ = true
+
+[node name="Other" type="Panel" parent="Grid"]
+custom_minimum_size = Vector2(960, 540)
+layout_mode = 2
+theme = SubResource("Theme_1xert")
+metadata/_edit_lock_ = true
+
+[node name="Save_location" type="FileDialog" parent="."]
+title = "Open a Directory"
+size = Vector2i(392, 159)
+ok_button_text = "Select Current Folder"
+file_mode = 2
+access = 2
+
+[connection signal="text_submitted" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/AI_name/Value" to="." method="_on_ainame_submitted"]
+[connection signal="text_submitted" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Layer_structure/Value" to="." method="_on_layerstructure_submitted"]
+[connection signal="pressed" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI/HBox/Save_AI" to="." method="_on_saveai_pressed"]
+[connection signal="pressed" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI/HBox/Load_AI" to="." method="_on_loadai_pressed"]
+[connection signal="pressed" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Save_load_AI/Generate_AI" to="." method="_on_generateai_pressed"]
+[connection signal="toggled" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Pause_next/Check_box" to="." method="_on_pause_toggled"]
+[connection signal="toggled" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Autoplay_simulation/Check_box" to="." method="_on_autoplaysimulation_toggled"]
+[connection signal="pressed" from="Grid/AI_Controller/VBox/Settings_grups/Generel_settings/Simulation_control/Next_generation" to="." method="_on_nextgeneration_pressed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/AIs_to_save/HBox/Value" to="." method="_on_aistosave_changed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Mutations_per_ai/HBox/Value" to="." method="_on_mutationsperai_changed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_strength/HBox/Value" to="." method="_on_weightstrength_changed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Weight_amount/HBox/Value" to="." method="_on_weightamount_changed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_strength/HBox/Value" to="." method="_on_biasestrength_changed"]
+[connection signal="value_changed" from="Grid/AI_Controller/VBox/Settings_grups/AI_settings/Biase_amount/HBox/Value" to="." method="_on_biaseamount_changed"]
+[connection signal="pressed" from="Grid/AI_Controller/VBox/Settings_grups/Other_settings/Select_save_location/Select_save_location" to="." method="_on_selectsavelocation_pressed"]
+[connection signal="dir_selected" from="Save_location" to="." method="_on_save_location_dir_selected"]
